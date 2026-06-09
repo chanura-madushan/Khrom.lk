@@ -1,0 +1,330 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+/* COLOR CONFIGS matching your Home system */
+:root {
+  --bg-black: #080808;
+  --bg-input: #121212;
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-hover: #262626;
+  --gradient-brand: linear-gradient(135deg, #7c3aed, #06b6d4);
+  --text-muted: #9ca3af;
+}
+
+.signin-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg-black);
+  overflow: hidden;
+}
+
+/* LEFT HERO BANNER BLOCK */
+.signin-banner {
+  flex: 1.1;
+  position: relative;
+  margin: 16px;
+  border-radius: 14px;
+  background: linear-gradient(to bottom, rgba(124, 58, 237, 0.15), rgba(8, 8, 8, 0.95)),
+              url('https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1000&q=80');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px;
+  border: 1px solid var(--border-subtle);
+}
+
+.brand-logo {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.brand-logo span {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.back-website-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+
+.back-website-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #7c3aed;
+}
+
+.banner-title {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+  margin-bottom: 30px;
+}
+
+.banner-title span {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.carousel-indicators {
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 24px;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+}
+
+.dot.active {
+  background: var(--gradient-brand);
+  width: 36px;
+}
+
+/* RIGHT CONFIG FORM PANEL */
+.signin-form-section {
+  flex: 0.9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.form-wrapper {
+  width: 100%;
+  max-width: 420px;
+}
+
+.form-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  margin-bottom: 8px;
+}
+
+.form-subtitle {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 32px;
+}
+
+.login-link {
+  color: #06b6d4;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}
+
+/* FORM ELEMENTS */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-row {
+  display: flex;
+  gap: 16px;
+}
+
+.input-group {
+  flex: 1;
+  position: relative;
+  background-color: var(--bg-input);
+  border-radius: 12px;
+  border: 1px solid var(--border-hover);
+  transition: all 0.2s ease;
+}
+
+.input-group:focus-within {
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 1px #7c3aed;
+}
+
+.input-group input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 16px;
+  color: white;
+  font-size: 0.95rem;
+}
+
+.input-group input::placeholder {
+  color: #555;
+}
+
+.password-group {
+  display: flex;
+  align-items: center;
+}
+
+.password-toggle {
+  background: none;
+  border: none;
+  color: #555;
+  position: absolute;
+  right: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.password-toggle:hover {
+  color: white;
+}
+
+/* CHECKBOX INTERFACE */
+.checkbox-group {
+  margin-top: 4px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  user-select: none;
+}
+
+.checkbox-label input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.custom-checkbox {
+  height: 18px;
+  width: 18px;
+  background-color: #222;
+  border: 1px solid var(--border-hover);
+  border-radius: 4px;
+  margin-right: 10px;
+  display: inline-block;
+  position: relative;
+}
+
+.checkbox-label input:checked ~ .custom-checkbox {
+  background: var(--gradient-brand);
+  border: none;
+}
+
+.checkbox-label input:checked ~ .custom-checkbox::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 3px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.terms-link {
+  color: #7c3aed;
+  text-decoration: none;
+}
+
+.terms-link:hover {
+  text-decoration: underline;
+}
+
+/* REGISTER SUBMIT TRIGGER */
+.submit-btn {
+  height: 54px;
+  background: var(--gradient-brand);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: transform 0.2s ease;
+}
+
+.submit-btn:hover {
+  transform: translateY(-1px);
+}
+
+/* BREAK SEPARATOR */
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 28px 0;
+  color: #444;
+  font-size: 0.85rem;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.divider:not(:empty)::before { margin-right: 1em; }
+.divider:not(:empty)::after { margin-left: 1em; }
+
+/* THIRD-PARTY ROW LOGINS */
+.social-login-row {
+  display: flex;
+  gap: 16px;
+}
+
+.social-btn {
+  flex: 1;
+  height: 50px;
+  background: #111;
+  border: 1px solid var(--border-hover);
+  border-radius: 12px;
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: border-color 0.2s ease;
+}
+
+.social-btn:hover {
+  border-color: #7c3aed;
+}
+
+/* RESPONSIVE SCALING VIEWPORT */
+@media (max-width: 900px) {
+  .signin-banner {
+    display: none;
+  }
+  .signin-form-section {
+    flex: 1;
+  }
+}

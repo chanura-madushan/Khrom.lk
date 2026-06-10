@@ -14,12 +14,15 @@ function Home({ setPage }) {
           <a href="#">About</a>
         </div>
 
-        <button className="secondary-btn" onClick={() => setPage("signin")}>
-          Sign In
-        </button>
-        <button className="secondary-btn" onClick={() => setPage("signin")}>
-          Sign Up
-        </button>
+        <div>
+          <button className="secondary-btn" onClick={() => setPage("signin")}>
+            Sign In
+          </button>
+
+          <button className="secondary-btn" onClick={() => setPage("signup")}>
+            Sign Up
+          </button>
+        </div>
       </nav>
 
       <div className="hero">
@@ -28,7 +31,7 @@ function Home({ setPage }) {
         </h1>
 
         <p>
-          A clean, fast and scalable platform designed for modern digital products.
+          A clean, fast and scalable platform for modern digital products.
         </p>
 
         <div className="hero-buttons">

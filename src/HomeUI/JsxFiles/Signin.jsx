@@ -1,29 +1,33 @@
-
-import "../CssFiles/Signin.css";
 import { useState } from "react";
+import "../CssFiles/Signin.css";
 
 function Signin({ setPage }) {
   const [showPassword, setShowPassword] = useState(false);
 
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
     email: "",
     password: "",
-    agreeTerms: true,
   });
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value } = e.target;
 
     setFormData((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: value,
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // =========================
+    // DATABASE CONNECTION LATER
+    // =========================
+    // fetch("/api/signin", {
+    //   method: "POST",
+    //   body: JSON.stringify(formData)
+    // });
   };
 
   return (
@@ -35,7 +39,7 @@ function Signin({ setPage }) {
           </div>
 
           <h1 className="banner-title">
-            Build<span>Sell</span> Scale
+            Welcome <span>Back</span>
           </h1>
         </div>
 
@@ -46,28 +50,10 @@ function Signin({ setPage }) {
 
       <div className="signin-form-section">
         <div className="form-wrapper">
-          <h1 className="form-title">Create Account</h1>
-          <p className="form-subtitle">Start building today</p>
+          <h1 className="form-title">Sign In</h1>
+          <p className="form-subtitle">Access your account</p>
 
           <form className="auth-form" onSubmit={handleSubmit}>
-            <div className="form-row">
-              <div className="input-group">
-                <input
-                  name="firstName"
-                  placeholder="First Name"
-                  onChange={handleChange}
-                />
-              </div>
-
-              <div className="input-group">
-                <input
-                  name="lastName"
-                  placeholder="Last Name"
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-
             <div className="input-group">
               <input
                 name="email"
@@ -93,20 +79,26 @@ function Signin({ setPage }) {
               </button>
             </div>
 
-            <label className="checkbox-label">
-              <input
-                type="checkbox"
-                name="agreeTerms"
-                checked={formData.agreeTerms}
-                onChange={handleChange}
-              />
-              <span className="custom-checkbox"></span>
-              I agree to Terms
-            </label>
-
             <button className="submit-btn" type="submit">
-              Create Account
+              Sign In
             </button>
+
+            <div className="switch-link">
+              Don’t have an account?
+              <button
+                type="button"
+                onClick={() => setPage("signup")}
+                style={{
+                  background: "none",
+                  border: "none",
+                  color: "#06b6d4",
+                  cursor: "pointer",
+                  marginLeft: "6px",
+                }}
+              >
+                Sign Up
+              </button>
+            </div>
           </form>
         </div>
       </div>

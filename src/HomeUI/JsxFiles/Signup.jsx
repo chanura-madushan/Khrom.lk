@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "../CssFiles/Signup.css";
+
 function Signup({ setPage }) {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -22,18 +23,26 @@ function Signup({ setPage }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // =========================
+    // DATABASE CONNECTION LATER
+    // =========================
+    // fetch("/api/signup", {
+    //   method: "POST",
+    //   body: JSON.stringify(formData)
+    // });
   };
 
   return (
-    <div className="signin-container">
-      <div className="signin-banner">
+    <div className="signup-container">
+      <div className="signup-banner">
         <div>
-          <div className="brand-logo">
+          <div className="signup-brand">
             Khrom<span>.lk</span>
           </div>
 
-          <h1 className="banner-title">
-            Build <span>something</span> powerful
+          <h1 className="signup-title">
+            Start <span>Building</span>
           </h1>
         </div>
 
@@ -42,10 +51,10 @@ function Signup({ setPage }) {
         </button>
       </div>
 
-      <div className="signin-form-section">
+      <div className="signup-form-section">
         <div className="form-wrapper">
           <h1 className="form-title">Create Account</h1>
-          <p className="form-subtitle">Start building today</p>
+          <p className="form-subtitle">Join us today</p>
 
           <form className="auth-form" onSubmit={handleSubmit}>
             <div className="form-row">
@@ -53,7 +62,6 @@ function Signup({ setPage }) {
                 <input
                   name="firstName"
                   placeholder="First Name"
-                  value={formData.firstName}
                   onChange={handleChange}
                 />
               </div>
@@ -62,7 +70,6 @@ function Signup({ setPage }) {
                 <input
                   name="lastName"
                   placeholder="Last Name"
-                  value={formData.lastName}
                   onChange={handleChange}
                 />
               </div>
@@ -72,7 +79,6 @@ function Signup({ setPage }) {
               <input
                 name="email"
                 placeholder="Email"
-                value={formData.email}
                 onChange={handleChange}
               />
             </div>
@@ -82,7 +88,6 @@ function Signup({ setPage }) {
                 type={showPassword ? "text" : "password"}
                 name="password"
                 placeholder="Password"
-                value={formData.password}
                 onChange={handleChange}
               />
 
@@ -109,6 +114,23 @@ function Signup({ setPage }) {
             <button className="submit-btn" type="submit">
               Create Account
             </button>
+
+            <div className="switch-link">
+              Already have an account?
+              <button
+                type="button"
+                onClick={() => setPage("signin")}
+                style={{
+                  background: "none",
+                  border: "none",
+                  color: "#06b6d4",
+                  cursor: "pointer",
+                  marginLeft: "6px",
+                }}
+              >
+                Sign In
+              </button>
+            </div>
           </form>
         </div>
       </div>

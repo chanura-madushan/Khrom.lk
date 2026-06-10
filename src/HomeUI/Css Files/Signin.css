@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
 
-/* COLOR CONFIGS matching your Home system */
+
 :root {
   --bg-black: #080808;
   --bg-input: #121212;
@@ -18,7 +18,7 @@
   overflow: hidden;
 }
 
-/* LEFT HERO BANNER BLOCK */
+
 .signin-banner {
   flex: 1.1;
   position: relative;
@@ -97,7 +97,7 @@
   width: 36px;
 }
 
-/* RIGHT CONFIG FORM PANEL */
+
 .signin-form-section {
   flex: 0.9;
   display: flex;
@@ -134,7 +134,7 @@
   text-decoration: underline;
 }
 
-/* FORM ELEMENTS */
+
 .auth-form {
   display: flex;
   flex-direction: column;
@@ -194,7 +194,7 @@
   color: white;
 }
 
-/* CHECKBOX INTERFACE */
+
 .checkbox-group {
   margin-top: 4px;
 }
@@ -254,7 +254,7 @@
   text-decoration: underline;
 }
 
-/* REGISTER SUBMIT TRIGGER */
+
 .submit-btn {
   height: 54px;
   background: var(--gradient-brand);
@@ -272,7 +272,7 @@
   transform: translateY(-1px);
 }
 
-/* BREAK SEPARATOR */
+
 .divider {
   display: flex;
   align-items: center;
@@ -292,7 +292,7 @@
 .divider:not(:empty)::before { margin-right: 1em; }
 .divider:not(:empty)::after { margin-left: 1em; }
 
-/* THIRD-PARTY ROW LOGINS */
+
 .social-login-row {
   display: flex;
   gap: 16px;
@@ -319,7 +319,7 @@
   border-color: #7c3aed;
 }
 
-/* RESPONSIVE SCALING VIEWPORT */
+
 @media (max-width: 900px) {
   .signin-banner {
     display: none;

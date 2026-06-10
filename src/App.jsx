@@ -1,11 +1,14 @@
-import Home from "./HomeUI/Jsx Files/Home.jsx";
-import Signin from "./HomeUI/Jsx Files/Signin.jsx";
+import { useState } from "react";
+import Home from "./HomeUI/JsxFiles/Home";
+import Signin from "./HomeUI/JsxFiles/Signin";
 
 function App() {
+  const [page, setPage] = useState("home");
+
   return (
     <>
-      <Home />
-      <Signin />
+      {page === "home" && <Home setPage={setPage} />}
+      {page === "signin" && <Signin setPage={setPage} />}
     </>
   );
 }

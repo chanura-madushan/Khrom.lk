@@ -28,13 +28,11 @@ body {
 
 /* NAVBAR */
 .navbar {
-  height: 80px;
-  padding: 0 40px;
+  height:fit-content;
+  padding: 0 30px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
 
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(10px);
 }
 
@@ -117,7 +115,7 @@ body {
 .primary-btn,
 .secondary-btn {
   height: 60px;
-  min-width: 200px;
+  min-width: 100px;
   border-radius: 14px;
   cursor: pointer;
   font-size: 1rem;

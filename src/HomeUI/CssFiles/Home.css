@@ -208,3 +208,37 @@ body {
 .footer a:hover {
   color: white;
 }
+
+
+
+/* ABOUT SECTION */
+.contact-section {
+  min-height: 100vh;
+  padding: 120px 24px;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.contact-title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 30px;
+  letter-spacing: -1px;
+}
+
+.contact-title span {
+  background: linear-gradient(90deg, #7c3aed, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.contact-text {
+  color: #9ca3af;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 18px;
+}

@@ -56,10 +56,10 @@ function Home() {
           A clean, fast and scalable platform for modern digital products.
         </p>
 
-        <div className="hero-buttons">
+      <div className="hero-buttons">
           <button
             className="primary-btn"
-            onClick={() => navigate("/signup")}
+            onClick={() => navigate("/getstarted")}
           >
             Get Started
           </button>

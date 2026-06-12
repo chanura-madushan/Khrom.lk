@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../CssFiles/BrowseStore.css";
 
 function BrowseStore() {
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // TEMP DATA (REMOVE AFTER DATABASE)
@@ -38,14 +40,19 @@ function BrowseStore() {
       <div className="product-grid">
         {products.map((product) => (
           <div className="product-card" key={product.id}>
-            <div className="product-image">Digital Product</div>
+            <div className="product-image">📦</div>
             <div className="product-info">
               <h2>{product.title}</h2>
               <p className="creator">By {product.creator}</p>
-              <p>{product.description}</p>
+              <p className="product-desc">{product.description}</p>
               <div className="bottom-row">
                 <strong>{product.price}</strong>
-                <button>View</button>
+                <button
+                  className="view-btn"
+                  onClick={() => navigate("/product", { state: { product } })}
+                >
+                  View
+                </button>
               </div>
             </div>
           </div>

@@ -4,9 +4,8 @@ import Home from "./HomeUI/JsxFiles/Home";
 import Signin from "./HomeUI/JsxFiles/Signin";
 import Signup from "./HomeUI/JsxFiles/Signup";
 import Getstarted from "./HomeUI/JsxFiles/Getstarted";
-
 import BrowseStore from "./BuyerSideUI/JsxFiles/BrowseStore";
-
+import ProductDetail from "./BuyerSideUI/JsxFiles/ProductDetail";   
 
 function App() {
   return (
@@ -16,6 +15,7 @@ function App() {
       <Route path="/signin" element={<Signin />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/store" element={<BrowseStore />} />
+      <Route path="/product" element={<ProductDetail />} />
     </Routes>
   );
 }

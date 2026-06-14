@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "../../Database/supabaseClient";
 import "../CssFiles/BrowseStore.css";
 
 function BrowseStore() {
@@ -33,10 +34,36 @@ function BrowseStore() {
     ]);
   }, []);
 
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    navigate("/signin");
+  };
+
   return (
     <div className="store-container">
-      <h1>Explore <span>Khrom</span></h1>
-      <p className="store-subtitle">Discover digital products from creators</p>
+
+      {/* Top bar */}
+      <div className="store-topbar">
+        <div className="store-logo">
+          Khrom<span>.lk</span>
+        </div>
+        <div className="topbar-actions">
+          <button className="home-btn" onClick={() => navigate("/")}>
+            ← Home
+          </button>
+          <button className="signout-btn" onClick={handleSignOut}>
+            Sign Out
+          </button>
+        </div>
+      </div>
+
+      {/* Header */}
+      <div className="store-header">
+        <h1>Explore <span>Khrom</span></h1>
+        <p className="store-subtitle">Discover digital products from creators</p>
+      </div>
+
+      {/* Products */}
       <div className="product-grid">
         {products.map((product) => (
           <div className="product-card" key={product.id}>

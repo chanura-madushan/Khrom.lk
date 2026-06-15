@@ -9,7 +9,7 @@ import Getstarted from "./HomeUI/JsxFiles/Getstarted";
 import BrowseStore from "./BuyerSideUI/JsxFiles/BrowseStore";
 import ProductDetail from "./BuyerSideUI/JsxFiles/ProductDetail";
 import AddProduct from "./SellerUI/JsxFiles/AddProduct";
-import SellerDashboard from "./SellerUI/JsxFiles/SellerDashboard";
+import SellerDashboard from "./SellerSideUI/JsxFiles/SellerDashboard";
 
 function App() {
   const [session, setSession] = useState(null);

@@ -13,7 +13,7 @@ function Getstarted() {
         <button className="btn secondary" onClick={() => navigate("/signin")}>
           Sign In
         </button>
-
+        
         <button className="btn primary" onClick={() => navigate("/signup")}>
           Sign Up
         </button>

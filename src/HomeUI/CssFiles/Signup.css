@@ -239,3 +239,34 @@
     flex: 1;
   }
 }
+
+.role-selector {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.role-btn {
+  flex: 1;
+  padding: 14px;
+  background: #111;
+  border: 1px solid #262626;
+  border-radius: 12px;
+  color: #9ca3af;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: Inter, sans-serif;
+  transition: all 0.2s ease;
+}
+
+.role-btn:hover {
+  border-color: #7c3aed;
+  color: #fff;
+}
+
+.role-active {
+  border-color: #7c3aed !important;
+  background: rgba(124, 58, 237, 0.12) !important;
+  color: #fff !important;
+}

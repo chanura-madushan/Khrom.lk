@@ -8,21 +8,40 @@ import Signup from "./HomeUI/JsxFiles/Signup";
 import Getstarted from "./HomeUI/JsxFiles/Getstarted";
 import BrowseStore from "./BuyerSideUI/JsxFiles/BrowseStore";
 import ProductDetail from "./BuyerSideUI/JsxFiles/ProductDetail";
+import AddProduct from "./SellerUI/JsxFiles/AddProduct";
+import SellerDashboard from "./SellerUI/JsxFiles/SellerDashboard";
 
 function App() {
   const [session, setSession] = useState(null);
+  const [role, setRole] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check if user is already logged in
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
       setSession(session);
+      if (session) {
+        const { data } = await supabase
+          .from("users")
+          .select("role")
+          .eq("id", session.user.id)
+          .single();
+        setRole(data?.role);
+      }
       setLoading(false);
     });
 
-    // Listen for login/logout changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
       setSession(session);
+      if (session) {
+        const { data } = await supabase
+          .from("users")
+          .select("role")
+          .eq("id", session.user.id)
+          .single();
+        setRole(data?.role);
+      } else {
+        setRole(null);
+      }
     });
 
     return () => subscription.unsubscribe();
@@ -30,16 +49,7 @@ function App() {
 
   if (loading) {
     return (
-      <div style={{
-        minHeight: "100vh",
-        background: "#080808",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        color: "#fff",
-        fontFamily: "Inter, sans-serif",
-        fontSize: "1rem",
-      }}>
+      <div style={{ minHeight: "100vh", background: "#080808", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontFamily: "Inter, sans-serif" }}>
         Loading...
       </div>
     );
@@ -49,14 +59,16 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/getstarted" element={<Getstarted />} />
+      <Route path="/signin" element={session ? <Navigate to={role === "seller" ? "/dashboard" : "/store"} /> : <Signin />} />
+      <Route path="/signup" element={session ? <Navigate to={role === "seller" ? "/dashboard" : "/store"} /> : <Signup />} />
 
-      {/* Redirect to /store if already logged in */}
-      <Route path="/signin" element={session ? <Navigate to="/store" /> : <Signin />} />
-      <Route path="/signup" element={session ? <Navigate to="/store" /> : <Signup />} />
-
-      {/* Redirect to /signin if not logged in */}
+      {/* Buyer routes */}
       <Route path="/store" element={session ? <BrowseStore /> : <Navigate to="/signin" />} />
       <Route path="/product" element={session ? <ProductDetail /> : <Navigate to="/signin" />} />
+
+      {/* Seller routes */}
+      <Route path="/dashboard" element={session && role === "seller" ? <SellerDashboard /> : <Navigate to="/signin" />} />
+      <Route path="/add-product" element={session && role === "seller" ? <AddProduct /> : <Navigate to="/signin" />} />
     </Routes>
   );
 }

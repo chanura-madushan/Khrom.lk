@@ -22,25 +22,38 @@ function Signin() {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    setLoading(true);
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  setError("");
+  setLoading(true);
 
-    const { error: signInError } = await supabase.auth.signInWithPassword({
-      email: formData.email,
-      password: formData.password,
-    });
+  const { data, error: signInError } = await supabase.auth.signInWithPassword({
+    email: formData.email,
+    password: formData.password,
+  });
 
-    if (signInError) {
-      setError("Wrong email or password");
-      setLoading(false);
-      return;
-    }
-
+  if (signInError) {
+    setError("Wrong email or password");
     setLoading(false);
+    return;
+  }
+
+  // Get user role from users table
+  const { data: userData } = await supabase
+    .from("users")
+    .select("role")
+    .eq("id", data.user.id)
+    .single();
+
+  setLoading(false);
+
+  // Redirect based on role
+  if (userData?.role === "seller") {
+    navigate("/dashboard");
+  } else {
     navigate("/store");
-  };
+  }
+};
 
   return (
     <div className="signin-container">

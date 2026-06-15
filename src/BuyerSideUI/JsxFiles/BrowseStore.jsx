@@ -30,18 +30,18 @@ function BrowseStore() {
         creator: "Design Hub",
         price: "$29",
         description: "Premium design resources."
-      }
+      },
+      
     ]);
   }, []);
+
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     navigate("/signin");
   };
-
   return (
     <div className="store-container">
-
       {/* Top bar */}
       <div className="store-topbar">
         <div className="store-logo">

@@ -14,6 +14,7 @@ function Signup() {
     lastName: "",
     email: "",
     password: "",
+    role: "buyer",
     agreeTerms: false,
   });
 
@@ -40,7 +41,6 @@ function Signup() {
 
     setLoading(true);
 
-    // 1. Create auth account
     const { data, error: signUpError } = await supabase.auth.signUp({
       email: formData.email,
       password: formData.password,
@@ -52,12 +52,11 @@ function Signup() {
       return;
     }
 
-    // 2. Save to users table
     const { error: dbError } = await supabase.from("users").insert({
       id: data.user.id,
       username: `${formData.firstName} ${formData.lastName}`,
       email: formData.email,
-      role: "buyer",
+      role: formData.role,
     });
 
     if (dbError) {
@@ -67,23 +66,22 @@ function Signup() {
     }
 
     setLoading(false);
-    navigate("/store");
+    // Redirect based on role
+    if (formData.role === "seller") {
+      navigate("/dashboard");
+    } else {
+      navigate("/store");
+    }
   };
 
   return (
     <div className="signup-container">
       <div className="signup-banner">
         <div>
-          <div className="signup-brand">
-            Khrom<span>.lk</span>
-          </div>
-          <h1 className="signup-title">
-            Start <span>Building</span>
-          </h1>
+          <div className="signup-brand">Khrom<span>.lk</span></div>
+          <h1 className="signup-title">Start <span>Building</span></h1>
         </div>
-        <button className="back-website-btn" onClick={() => navigate("/")}>
-          Back
-        </button>
+        <button className="back-website-btn" onClick={() => navigate("/")}>Back</button>
       </div>
 
       <div className="signup-form-section">
@@ -92,50 +90,42 @@ function Signup() {
           <p className="form-subtitle">Join us today</p>
 
           {error && (
-            <div style={{
-              background: "rgba(239,68,68,0.1)",
-              border: "1px solid rgba(239,68,68,0.3)",
-              borderRadius: "8px",
-              padding: "10px 14px",
-              color: "#f87171",
-              fontSize: "0.88rem",
-              marginBottom: "16px",
-            }}>
+            <div style={{ background: "rgba(239,68,68,0.1)", border: "1px solid rgba(239,68,68,0.3)", borderRadius: "8px", padding: "10px 14px", color: "#f87171", fontSize: "0.88rem", marginBottom: "16px" }}>
               {error}
             </div>
           )}
 
           <form className="auth-form" onSubmit={handleSubmit}>
+
+            {/* Role selector */}
+            <div className="role-selector">
+              <button
+                type="button"
+                className={`role-btn ${formData.role === "buyer" ? "role-active" : ""}`}
+                onClick={() => setFormData(prev => ({ ...prev, role: "buyer" }))}
+              >
+                🛍️ I'm a Buyer
+              </button>
+              <button
+                type="button"
+                className={`role-btn ${formData.role === "seller" ? "role-active" : ""}`}
+                onClick={() => setFormData(prev => ({ ...prev, role: "seller" }))}
+              >
+                🚀 I'm a Seller
+              </button>
+            </div>
+
             <div className="form-row">
               <div className="input-group">
-                <input
-                  name="firstName"
-                  placeholder="First Name"
-                  value={formData.firstName}
-                  onChange={handleChange}
-                  required
-                />
+                <input name="firstName" placeholder="First Name" value={formData.firstName} onChange={handleChange} required />
               </div>
               <div className="input-group">
-                <input
-                  name="lastName"
-                  placeholder="Last Name"
-                  value={formData.lastName}
-                  onChange={handleChange}
-                  required
-                />
+                <input name="lastName" placeholder="Last Name" value={formData.lastName} onChange={handleChange} required />
               </div>
             </div>
 
             <div className="input-group">
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
+              <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
             </div>
 
             <div className="input-group password-group">
@@ -147,48 +137,22 @@ function Signup() {
                 onChange={handleChange}
                 required
               />
-              <button
-                type="button"
-                className="password-toggle"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                👁
-              </button>
+              <button type="button" className="password-toggle" onClick={() => setShowPassword(!showPassword)}>👁</button>
             </div>
 
             <label className="checkbox-label">
-              <input
-                type="checkbox"
-                name="agreeTerms"
-                checked={formData.agreeTerms}
-                onChange={handleChange}
-              />
+              <input type="checkbox" name="agreeTerms" checked={formData.agreeTerms} onChange={handleChange} />
               <span className="custom-checkbox"></span>
               I agree to Terms & Conditions
             </label>
 
-            <button
-              className="submit-btn"
-              type="submit"
-              disabled={loading}
-              style={{ opacity: loading ? 0.7 : 1 }}
-            >
+            <button className="submit-btn" type="submit" disabled={loading} style={{ opacity: loading ? 0.7 : 1 }}>
               {loading ? "Creating account..." : "Create Account"}
             </button>
 
             <div className="switch-link">
               Already have an account?
-              <button
-                type="button"
-                onClick={() => navigate("/signin")}
-                style={{
-                  background: "none",
-                  border: "none",
-                  color: "#06b6d4",
-                  cursor: "pointer",
-                  marginLeft: "6px",
-                }}
-              >
+              <button type="button" onClick={() => navigate("/signin")} style={{ background: "none", border: "none", color: "#06b6d4", cursor: "pointer", marginLeft: "6px" }}>
                 Sign In
               </button>
             </div>

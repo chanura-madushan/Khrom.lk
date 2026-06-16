@@ -8,8 +8,7 @@ import Signup from "./HomeUI/JsxFiles/Signup";
 import Getstarted from "./HomeUI/JsxFiles/Getstarted";
 import BrowseStore from "./BuyerSideUI/JsxFiles/BrowseStore";
 import ProductDetail from "./BuyerSideUI/JsxFiles/ProductDetail";
-import AddProduct from "./SellerUI/JsxFiles/AddProduct";
-import SellerDashboard from "./SellerSideUI/JsxFiles/SellerDashboard";
+import AddProduct from "./SellerSideUI/JsxFiles/AddProduct";
 
 function App() {
   const [session, setSession] = useState(null);

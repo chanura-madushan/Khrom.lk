@@ -9,7 +9,6 @@
   font-family: Inter, sans-serif;
 }
 
-/* Topbar */
 .sd-topbar {
   display: flex;
   align-items: center;
@@ -64,14 +63,12 @@
   background: rgba(239,68,68,0.08);
 }
 
-/* Layout */
 .sd-main {
   display: grid;
   grid-template-columns: 240px 1fr;
   min-height: calc(100vh - 65px);
 }
 
-/* Sidebar */
 .sd-sidebar {
   border-right: 1px solid rgba(255,255,255,0.06);
   padding: 30px 20px;
@@ -152,7 +149,6 @@
   border: 1px solid rgba(124,58,237,0.2);
 }
 
-/* Content */
 .sd-content {
   padding: 40px;
   overflow-y: auto;
@@ -188,7 +184,6 @@
 
 .sd-empty p:first-child { font-size: 2.5rem; }
 
-/* Products list */
 .sd-products-list {
   display: flex;
   flex-direction: column;
@@ -305,7 +300,6 @@
   border-color: #f87171;
 }
 
-/* Analytics */
 .sd-stats-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -361,7 +355,6 @@
 .sd-breakdown-sales { color: #9ca3af; margin: 0 20px; }
 .sd-breakdown-revenue { color: #a78bfa; font-weight: 600; }
 
-/* Profile */
 .sd-profile-card {
   display: flex;
   align-items: center;
@@ -410,10 +403,13 @@
 .sd-detail-label { color: #9ca3af; font-size: 0.88rem; }
 .sd-detail-value { color: #fff; font-size: 0.88rem; font-weight: 500; }
 
-/* Mobile */
 @media (max-width: 768px) {
   .sd-main { grid-template-columns: 1fr; }
-  .sd-sidebar { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); padding: 20px; }
+  .sd-sidebar {
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 20px;
+  }
   .sd-nav { flex-direction: row; }
   .sd-content { padding: 20px; }
   .sd-stats-grid { grid-template-columns: 1fr; }

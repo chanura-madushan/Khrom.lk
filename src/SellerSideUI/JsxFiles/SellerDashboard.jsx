@@ -30,7 +30,6 @@ function SellerDashboard() {
 
   const handleDelete = async (productId) => {
     if (!confirm("Are you sure you want to delete this product?")) return;
-
     await supabase.from("products").delete().eq("id", productId);
     setProducts(prev => prev.filter(p => p.id !== productId));
   };
@@ -181,15 +180,21 @@ function SellerDashboard() {
 
               <div className="sd-products-breakdown">
                 <h3>Products Breakdown</h3>
-                {products.map(product => (
-                  <div key={product.id} className="sd-breakdown-row">
-                    <span className="sd-breakdown-title">{product.title}</span>
-                    <span className="sd-breakdown-sales">{product.total_sales || 0} sales</span>
-                    <span className="sd-breakdown-revenue">
-                      ${((product.total_sales || 0) * product.price).toFixed(2)}
-                    </span>
-                  </div>
-                ))}
+                {products.length === 0 ? (
+                  <p style={{ color: "#9ca3af", fontSize: "0.88rem", marginTop: "12px" }}>
+                    No products to show yet.
+                  </p>
+                ) : (
+                  products.map(product => (
+                    <div key={product.id} className="sd-breakdown-row">
+                      <span className="sd-breakdown-title">{product.title}</span>
+                      <span className="sd-breakdown-sales">{product.total_sales || 0} sales</span>
+                      <span className="sd-breakdown-revenue">
+                        ${((product.total_sales || 0) * product.price).toFixed(2)}
+                      </span>
+                    </div>
+                  ))
+                )}
               </div>
             </div>
           )}
@@ -216,7 +221,11 @@ function SellerDashboard() {
                 <div className="sd-detail-row">
                   <span className="sd-detail-label">Member since</span>
                   <span className="sd-detail-value">
-                    {new Date(user?.created_at).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+                    {user?.created_at
+                      ? new Date(user.created_at).toLocaleDateString("en-US", {
+                          year: "numeric", month: "long", day: "numeric"
+                        })
+                      : "—"}
                   </span>
                 </div>
                 <div className="sd-detail-row">

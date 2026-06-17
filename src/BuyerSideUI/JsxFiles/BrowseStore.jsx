@@ -5,43 +5,36 @@ import "../CssFiles/BrowseStore.css";
 
 function BrowseStore() {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // TEMP DATA (REMOVE AFTER DATABASE)
-    setProducts([
-      {
-        id: 1,
-        title: "Web Development Masterclass",
-        creator: "Creator Studio",
-        price: "$49",
-        description: "Learn modern web development."
-      },
-      {
-        id: 2,
-        title: "Trading Strategy Course",
-        creator: "Trading Academy",
-        price: "$79",
-        description: "Professional trading education."
-      },
-      {
-        id: 3,
-        title: "UI Design Templates",
-        creator: "Design Hub",
-        price: "$29",
-        description: "Premium design resources."
-      },
-      
-    ]);
+    fetchProducts();
   }, []);
 
+  const fetchProducts = async () => {
+    const { data, error } = await supabase
+      .from("products")
+      .select("*")
+      .eq("status", "active")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error("Error fetching products:", error);
+    } else {
+      setProducts(data);
+    }
+    setLoading(false);
+  };
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     navigate("/signin");
   };
+
   return (
     <div className="store-container">
+
       {/* Top bar */}
       <div className="store-topbar">
         <div className="store-logo">
@@ -64,27 +57,41 @@ function BrowseStore() {
       </div>
 
       {/* Products */}
-      <div className="product-grid">
-        {products.map((product) => (
-          <div className="product-card" key={product.id}>
-            <div className="product-image">📦</div>
-            <div className="product-info">
-              <h2>{product.title}</h2>
-              <p className="creator">By {product.creator}</p>
-              <p className="product-desc">{product.description}</p>
-              <div className="bottom-row">
-                <strong>{product.price}</strong>
-                <button
-                  className="view-btn"
-                  onClick={() => navigate("/product", { state: { product } })}
-                >
-                  View
-                </button>
+      {loading ? (
+        <p style={{ padding: "0 40px", color: "#9ca3af" }}>Loading products...</p>
+      ) : products.length === 0 ? (
+        <div style={{ padding: "40px", textAlign: "center", color: "#9ca3af" }}>
+          <p style={{ fontSize: "2rem", marginBottom: "10px" }}>📦</p>
+          <p>No products available yet. Check back soon!</p>
+        </div>
+      ) : (
+        <div className="product-grid">
+          {products.map((product) => (
+            <div className="product-card" key={product.id}>
+              <div className="product-image">
+                {product.thumbnail_url
+                  ? <img src={product.thumbnail_url} alt={product.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                  : "📦"
+                }
+              </div>
+              <div className="product-info">
+                <h2>{product.title}</h2>
+                <p className="creator">{product.category}</p>
+                <p className="product-desc">{product.description}</p>
+                <div className="bottom-row">
+                  <strong>${product.price}</strong>
+                  <button
+                    className="view-btn"
+                    onClick={() => navigate("/product", { state: { product } })}
+                  >
+                    View
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

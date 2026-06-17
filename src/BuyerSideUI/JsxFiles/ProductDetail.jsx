@@ -50,12 +50,10 @@ function ProductDetail() {
         <div className="pd-right">
 
           {/* Creator */}
-          <div className="pd-creator-row">
-            <div className="pd-avatar">
-              {product.creator?.charAt(0)}
-            </div>
-            <span className="pd-creator-name">{product.creator}</span>
-          </div>
+        <div className="pd-creator-row">
+            <div className="pd-avatar">{product.category?.charAt(0) || "K"}</div>
+            <span className="pd-creator-name">{product.category}</span>
+        </div>
 
           {/* Title */}
           <h1 className="pd-title">{product.title}</h1>
